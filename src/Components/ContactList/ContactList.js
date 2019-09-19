@@ -2,10 +2,17 @@ import React from 'react';
 
 import ContactListItem from '../ContactListItem/ContactListItem'
 
-const ContactList = ({ persons }) =>{
+const ContactList = ({ persons, onFavoriteChange }) =>{
 
     const newItem = persons.map((item) =>{
-        return <ContactListItem name={item.name} desc={item.desc} gender={item.gender} avatar={item.avatar} id={item.id} />
+        return <ContactListItem 
+        name={item.name} 
+        desc={item.desc} 
+        gender={item.gender} 
+        avatar={item.avatar} 
+        id={item.id}
+        favorite={item.favorite}
+        onFavoriteChange={() => onFavoriteChange(item.id)} />
     });
 
     return(
