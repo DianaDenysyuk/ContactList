@@ -51,29 +51,76 @@ class App extends React.Component {
             },
             {
                 id: 6,
-                name : "Mary MacMiller",
+                name : "Mary McMiller",
                 desc : "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur",
                 gender : "women",
                 avatar : 58,
                 favorite: false
             }
-        ]
+        ],
+        findContact: ""
     }; 
 
-    onFavoriteChange = (id) =>{
-        // console.log("onFavoriteChange works", id);
-        this.setState({
-            //дописати
-            //listOfContact.findIndex()
+    onFavoriteChange = id => {
+        this.setState(state => {
+          const index = this.state.listOfContact.findIndex(elem => elem.id === id);
+
+          const newFavorite = this.state.listOfContact.slice();
+          
+          newFavorite[index].favorite = !newFavorite[index].favorite;
+          
+          return {
+            favorite: !this.newFavorite
+          };
         });
-    };
+      };
+
+    onSearch = searchName => {
+        this.setState({
+            findContact: searchName
+          });
+    }
+
+    onShowContact = (items, searchValue) => {
+        if (searchValue.length === 0) {
+          return items;
+        }
+    
+        return items.filter(item => {
+          return item.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1;
+        });
+    }
+
+    onContactDelete = id => {
+    this.setState(state => {
+        const index = this.state.listOfContact.findIndex(elem => elem.id === id);
+        const firstPart = this.state.listOfContact.slice(0, index);
+        const lastPart = this.state.listOfContact.slice(index + 1);
+        const newList = [...firstPart, ...lastPart];
+
+        return {
+        listOfContact: newList
+        };
+    });
+    }
+
+
     render() {
-        const { listOfContact } = this.state; 
+        const showContacts = this.onShowContact(
+            this.state.listOfContact,
+            this.state.findContact
+          );
+
         return(
             <section className="row-section">
                 <div className="continer">
                     <Header />
-                    <ContactList persons = {listOfContact} onFavoriteChange = {this.onFavoriteChange}/>
+                    <ContactList 
+                    persons = {showContacts}
+                    onFavoriteChange = {this.onFavoriteChange}
+                    onContactDelete={this.onContactDelete}
+                    onSearch={this.onSearch} 
+                    />
                 </div>
             </section>
         );

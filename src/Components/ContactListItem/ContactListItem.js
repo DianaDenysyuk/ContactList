@@ -36,23 +36,33 @@ class ContactListItem extends React.Component {
 	}
 	onFavoriteClick = () => {
 		if (!this.state.favorite) {
-			this.setState({
-				favorite: true, 
-				starStyle: "fa fa-star fa-2x star"
+			this.setState(() => {
+				return{
+					favorite: !this.state.favorite, 
+					starStyle: "fa fa-star fa-2x star"
+				}
 			});
 			
 		}
 		else{
-			this.setState({ 
-				favorite: false,
-				starStyle: "fa fa-star-o fa-2x star"
+			this.setState(() => {
+				return{
+					favorite: !this.state.favorite,
+					starStyle: "fa fa-star-o fa-2x star"
+				} 
 			});
 		}
+		// this.setState(() => {
+		// 	return {
+		// 	  favorite: !this.state.favorite,
+		// 	  starStyle: "fa fa-star fa-2x star"
+		// 	};
+		//   });
 		this.props.onFavoriteChange();
 	}
 
 	render() {
-		const { name, desc, gender } = this.props;
+		const { name, desc, gender, onContactDelete } = this.props;
 		// let btnStyle = "btn btn-default";
 		// if (this.state.btnChange){
 		// 	btnStyle = "btn btn-danger"
@@ -75,6 +85,7 @@ class ContactListItem extends React.Component {
 							{this.state.btnText}
 						</a>
 						<i className={this.state.starStyle} aria-hidden="true" onClick={this.onFavoriteClick}></i>
+						<i className="fa fa-times fa-2x remove" aria-hidden="true" onClick={onContactDelete}></i>
 					</div>
 			</div></li>
 		)
