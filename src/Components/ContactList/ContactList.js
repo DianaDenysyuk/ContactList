@@ -6,13 +6,13 @@ const ContactList = ({ persons, onFavoriteChange, onContactDelete, onSearch }) =
 
     const newItem = persons.map((item) =>{
         return (
-        <ContactListItem 
+        <ContactListItem
+        key={item.id} 
         id={item.id}
         name={item.name} 
         desc={item.desc} 
         gender={item.gender} 
         avatar={item.avatar} 
-        id={item.id}
         favorite={item.favorite}
         onFavoriteChange={() => onFavoriteChange(item.id)} 
         onContactDelete={() => onContactDelete(item.id)} />

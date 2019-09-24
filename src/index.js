@@ -5,6 +5,7 @@ import './index.css';
 //Components
 import Header from './Components/Header/Header';
 import ContactList from './Components/ContactList/ContactList';
+import Add from './Components/Add/Add';
 
 class App extends React.Component {
     state = {
@@ -78,16 +79,18 @@ class App extends React.Component {
     onSearch = searchName => {
         this.setState({
             findContact: searchName
-          });
+        });
     }
 
     onShowContact = (items, searchValue) => {
         if (searchValue.length === 0) {
-          return items;
+            return items;
         }
     
         return items.filter(item => {
-          return item.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1;
+          return (
+                item.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
+          );
         });
     }
 
@@ -121,6 +124,7 @@ class App extends React.Component {
                     onContactDelete={this.onContactDelete}
                     onSearch={this.onSearch} 
                     />
+                    <Add />
                 </div>
             </section>
         );
