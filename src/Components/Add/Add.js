@@ -8,15 +8,24 @@ class Add extends React.Component {
     };
 
     onGetName = e =>{
-        const newName = e.target.value;
         this.setState({
-            name: newName
+            name: e.target.value
+        });
+    }
+    onGetGender = e =>{
+        this.setState({
+            gender: e.target.value
+        });
+    }
+    onGetDesc = e =>{
+        this.setState({
+            desc: e.target.value
         });
     }
     onSubmit = e => {
         e.preventDefault();
-        //this.props.addContact(this.state.name, this.state.gender, this.state.desc);
-    }
+        this.props.addContact(this.state.name, this.state.gender, this.state.desc);
+    };
     render() {
         return (
             <div className="col-md-10 offset-md-1 row-block">
@@ -34,6 +43,7 @@ class Add extends React.Component {
                     name="usergender"
                     id="usergender1"
                     value="women"
+                    onClick={this.onGetGender}
                 />
                 <label className="form-check-label" htmlFor="usergender1">
                     Women
@@ -46,6 +56,7 @@ class Add extends React.Component {
                     name="usergender"
                     id="usergender2"
                     value="men"
+                    onClick={this.onGetGender}
                 />
                 <label className="form-check-label" htmlFor="usergender2">
                     Men
@@ -55,6 +66,7 @@ class Add extends React.Component {
                 type="text"
                 placeholder="Description"
                 className="form-control"
+                onChange={this.onGetDesc}
                 />
                 <button className="btn btn-success mt-1" type="submit">
                 New Contact

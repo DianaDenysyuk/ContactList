@@ -8,6 +8,7 @@ import ContactList from './Components/ContactList/ContactList';
 import Add from './Components/Add/Add';
 
 class App extends React.Component {
+    counterID = 100;
     state = {
         listOfContact: [
             {
@@ -106,7 +107,26 @@ class App extends React.Component {
         };
     });
     }
+    addNewContact = (name, gender, desc) =>{
+        return {
+            id: this.counterID++,
+            name : name,
+            desc : desc,
+            gender : gender,
+            avatar : Math.floor(Math.random() * 99),
+            favorite: false
+        }
+    }
 
+    addContact = (name, gender, desc) =>{
+        const contact = this.addNewContact(name, gender, desc);
+        const newContactArr = [ ... this.state.listOfContact, contact];
+        this.setState(state => {
+            return {
+                listOfContact: newContactArr
+            };
+        })
+    }
 
     render() {
         const showContacts = this.onShowContact(
@@ -124,7 +144,7 @@ class App extends React.Component {
                     onContactDelete={this.onContactDelete}
                     onSearch={this.onSearch} 
                     />
-                    <Add />
+                    <Add addContact={this.addContact}/>
                 </div>
             </section>
         );
