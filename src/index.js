@@ -6,6 +6,10 @@ import './index.css';
 import Header from './Components/Header/Header';
 import ContactList from './Components/ContactList/ContactList';
 import Add from './Components/Add/Add';
+import AddNewContact from './Components/AddNewContact/AddNewContact';
+import Contact from './Components/Contact/Contact';
+import About from './Components/About/About';
+
 
 class App extends React.Component {
     counterID = 100;
@@ -57,6 +61,14 @@ class App extends React.Component {
                 desc : "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur",
                 gender : "women",
                 avatar : 58,
+                favorite: false
+            },
+            {
+                id: 7,
+                name : "Gary",
+                desc : "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates",
+                gender : "women",
+                avatar : 60,
                 favorite: false
             }
         ],
@@ -138,6 +150,9 @@ class App extends React.Component {
             <section className="row-section">
                 <div className="continer">
                     <Header />
+                    <AddNewContact />
+                    <Contact />
+                    <About />
                     <ContactList 
                     persons = {showContacts}
                     onFavoriteChange = {this.onFavoriteChange}
