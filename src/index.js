@@ -2,13 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+//Router
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
 //Components
 import Header from './Components/Header/Header';
 import ContactList from './Components/ContactList/ContactList';
 import Add from './Components/Add/Add';
-import AddNewContact from './Components/AddNewContact/AddNewContact';
 import Contact from './Components/Contact/Contact';
 import About from './Components/About/About';
+import NotFound from './Components/NotFound/NotFound';
+
 
 
 class App extends React.Component {
@@ -139,27 +143,43 @@ class App extends React.Component {
             };
         })
     }
-
+    
     render() {
         const showContacts = this.onShowContact(
             this.state.listOfContact,
             this.state.findContact
-          );
+        );
 
         return(
             <section className="row-section">
                 <div className="continer">
+                    <Router>
                     <Header />
-                    <AddNewContact />
-                    <Contact />
-                    <About />
-                    <ContactList 
-                    persons = {showContacts}
-                    onFavoriteChange = {this.onFavoriteChange}
-                    onContactDelete={this.onContactDelete}
-                    onSearch={this.onSearch} 
-                    />
-                    <Add addContact={this.addContact}/>
+                        <Switch>
+                            <Route path="/" 
+                            exact 
+                            render={() => (
+                                <ContactList 
+                                persons = {showContacts}
+                                onFavoriteChange = {this.onFavoriteChange}
+                                onContactDelete={this.onContactDelete}
+                                onSearch={this.onSearch} 
+                                />
+                            )} 
+                            />
+                            <Route path="/about" exact component={About} />
+                            <Route path="/contact" exact component={Contact} />
+                            <Route path="/add"
+                            exact
+                            render={() => (
+                                <Add 
+                                addContact={this.addContact}
+                                />
+                            )} 
+                            />
+                            <Route component={NotFound} />
+                        </Switch>
+                    </Router>
                 </div>
             </section>
         );

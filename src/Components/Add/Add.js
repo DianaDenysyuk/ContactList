@@ -4,7 +4,7 @@ class Add extends React.Component {
     state = {
         name: null,
         gender: null,
-        desc:null
+        desc: null
     };
 
     onGetName = e =>{
@@ -26,6 +26,14 @@ class Add extends React.Component {
         e.preventDefault();
         this.props.addContact(this.state.name, this.state.gender, this.state.desc);
     };
+    // alert = () =>{
+    //         // return(
+    //         // <div class="alert alert-primary" role="alert">
+    //         //     This is a primary alert—check it out!
+    //         // </div>  
+    //         // )
+    //         console.log("added");
+    // };
     render() {
         return (
             <div className="col-md-10 offset-md-1 row-block">
@@ -69,7 +77,7 @@ class Add extends React.Component {
                 onChange={this.onGetDesc}
                 />
                 <button className="btn btn-success mt-1" type="submit">
-                New Contact
+                    New Contact
                 </button>
             </form>
             </div>
