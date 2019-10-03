@@ -4,7 +4,8 @@ class Add extends React.Component {
     state = {
         name: null,
         gender: null,
-        desc: null
+        desc: null,
+        massege: null
     };
 
     onGetName = e =>{
